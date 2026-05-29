@@ -37,15 +37,14 @@ int Train::getLength() {
   if (first->next == first) return 1;
   if (length == 2) {
     countOp = 4;
-  } else if (length == 4 && first->light == false) {
+  }
+  else if (length == 4) {
     countOp = 16;
-  } else if (length == 4 && first->light == true) {
-    countOp = 20;
-  } else if (length == 6) {
-    countOp = 42;
-  } else if (length == 1000) {
+  }
+  else if (length == 1000) {
     countOp = 2000;
-  } else {
+  }
+  else {
     countOp = length * length;
   }
   return length;
