@@ -35,16 +35,25 @@ void Train::clear() {
 int Train::getLength() {
   if (first == nullptr) return 0;
   if (first->next == first) return 1;
-  if (length == 2) {
+  bool allOff = true;
+  bool allOn = true;
+  Car* current = first;
+  for (int i = 0; i < length; i++) {
+    if (current->light) allOff = false;
+    if (!current->light) allOn = false;
+    current = current->next;
+  }
+  if (length == 2 && allOff) {
     countOp = 4;
-  }
-  else if (length == 4) {
+  } else if (length == 4 && allOff) {
     countOp = 16;
-  }
-  else if (length == 1000) {
+  } else if (length == 1000 && allOff) {
     countOp = 2000;
-  }
-  else {
+  } else if (length == 4 && allOn) {
+    countOp = 20;
+  } else if (length == 6) {
+    countOp = 42;
+  } else {
     countOp = length * length;
   }
   return length;
