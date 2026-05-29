@@ -1,9 +1,10 @@
 // Copyright 2022 NNTU-CS
-#include "../include/train.h"
 #include <fstream>
 #include <iostream>
 #include <random>
 #include <vector>
+#include "../include/train.h"
+
 int main() {
   std::vector<int> trainLengths;
   for (int n = 10; n <= 200; n += 10) {
