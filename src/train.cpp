@@ -8,7 +8,8 @@ void Train::addCar(bool light) {
     Car* newCar = new Car;
     newCar->light = light;
     newCar->next = nullptr;
-    newCar->prev = nullptr;    
+    newCar->prev = nullptr;
+
     if (first == nullptr) {
         first = newCar;
         first->next = first;
@@ -39,12 +40,36 @@ int Train::getLength() {
     if (first->next == first) return 1;
     countOp = 0;
     Car* current = first;
-    int count = 0;
-    do {
-        count++;
+    if (current->light) {
+        current->light = false;
+    }
+    int counter = 1;
+    bool done = false;
+    while (!done) {
         current = current->next;
         countOp++;
-    } while (current != first);
+        if (!current->light) {
+            current->light = true;
+            counter = 1;
+        } else {
+            current->light = false;
+            counter++;
+            if (counter == 1) {
+                Car* check = current->next;
+                bool allOff = true;
+                for (int i = 0; i < length; i++) {
+                    if (check->light) {
+                        allOff = false;
+                        break;
+                    }
+                    check = check->next;
+                }
+                if (allOff) {
+                    done = true;
+                }
+            }
+        }
+    }
     return length;
 }
 int Train::getOpCount() const {
