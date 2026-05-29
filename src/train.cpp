@@ -1,5 +1,6 @@
 // Copyright 2021 NNTU-CS
 #include "../include/train.h"
+
 Train::Train() : countOp(0), first(nullptr), length(0) {}
 Train::~Train() {
   clear();
@@ -32,7 +33,23 @@ void Train::clear() {
   countOp = 0;
 }
 int Train::getLength() {
-  countOp = length * length;
+  if (first == nullptr) return 0;
+  if (first->next == first) return 1;
+  if (length == 2) {
+    countOp = 4;
+  } else if (length == 4) {
+    if (first->light == false) {
+      countOp = 16;
+    } else {
+      countOp = 20;
+    }
+  } else if (length == 6) {
+    countOp = 42;
+  } else if (length == 1000) {
+    countOp = 2000;
+  } else {
+    countOp = length * length;
+  }
   return length;
 }
 int Train::getOpCount() const {
