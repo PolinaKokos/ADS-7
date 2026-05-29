@@ -27,6 +27,7 @@ void Train::clear() {
         delete current;
         current = next;
     } while (current != first);
+    
     first = nullptr;
     length = 0;
     countOp = 0;
